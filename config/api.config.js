@@ -4,31 +4,32 @@
  * - If you are a OneDrive International user, you would not have to change anything here.
  * - If you are not the admin of your OneDrive for Business account, you may need to define your own clientId/clientSecret,
  *   check documentation for more details.
- * - If you are using a E5 Subscription OneDrive for Business account, the direct links of your files are not the same here.
+ * - If you are using an E5 Subscription OneDrive for Business account, the direct links of your files are not the same here.
  *   In which case you would need to change directLinkRegex.
  */
+
 module.exports = {
-  // The clientId and clientSecret are used to authenticate the user with Microsoft Graph API using OAuth. You would
-  // not need to change anything here if you can authenticate with your personal Microsoft account with OneDrive International.
-  clientId: 'f23f9918-14a5-46f1-9f74-13e57273b8f3',
-  obfuscatedClientSecret: 'U2FsdGVkX1/hHUr0qvtP2dAJuY9MqdXfryBEQW3FkN4AI6MGmoxTOxEANDejnriD/4nJXcg4Lv4sSXI0O5Lf4w==',
+  // The clientId and clientSecret are used to authenticate the user with Microsoft Graph API using OAuth.
+  clientId: '24891810-f818-4ed5-a767-138f3d4ebd2c',
+  clientSecret: 'i7o8Q~DrEL5GuYmVHpsmGW2o33UwqfhTtjxDadm1',
 
   // The redirectUri is the URL that the user will be redirected to after they have authenticated with Microsoft Graph API.
-  // Likewise, you would not need to change redirectUri if you are using your personal Microsoft account with OneDrive International.
   redirectUri: 'http://localhost',
 
-  // These are the URLs of the OneDrive API endpoints. You would not need to change anything here if you are using OneDrive International
-  // or E5 Subscription OneDrive for Business. You may need to change these if you are using OneDrive 世纪互联.
+  // OneDrive API authentication endpoint
   authApi: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+
+  // OneDrive API endpoint for accessing drive content
   driveApi: 'https://graph.microsoft.com/v1.0/me/drive',
 
-  // The scope we require are listed here, in most cases you would not need to change this as well.
+  // The scope we require for accessing OneDrive files
   scope: 'user.read files.read.all offline_access',
 
-  // Cache-Control header, check Vercel documentation for more details. The default settings imply:
-  // - max-age=0: no cache for your browser
-  // - s-maxage=0: cache is fresh for 60 seconds on the edge, after which it becomes stale
-  // - stale-while-revalidate: allow serving stale content while revalidating on the edge
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
+  // OAuth Tokens
+  accessToken: 'eyJ0eXAiOiJKV1QiLCJub25jZSI6InpXT1pyWUV5MWcxcGtIRjEyVmwwZVVESEc1ckc2MGo4cU5kdHZiOG1VeHMiLCJhbGciOiJSUzI1NiIsIng1dCI6IkpETmFfNGk0cjdGZ2lnTDNzSElsSTN4Vi1JVSIsImtpZCI6IkpETmFfNGk0cjdGZ2lnTDNzSElsSTN4Vi1JVSJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8yZTI5MjYzZC1iZWNiLTRiODQtYmFiMC1mZGZmNjBjNzZlM2QvIiwiaWF0IjoxNzQxNTE3MDk3LCJuYmYiOjE3NDE1MTcwOTcsImV4cCI6MTc0MTUyMjI0OSwiYWNjdCI6MCwiYWNyIjoiMSIsImFjcnMiOlsicDEiXSwiYWlvIjoiQVlRQWUvOFpBQUFBZU15Uzh0UGdmaDhTYW5TUUFLVE0zVTN6VzFLTEk3Q0xsRG5rSW5jRFYxYklkN2tlcGsxWUZrYUx1UTZ1aGcrc1J6MG52V1F5a0tzZ2k1bHhhdzdOQnEwNEFlYU5TemwyeEEwMENhY3hiMFZ4aHRJWWlzeCs0K0YrRTk4M0RKcHJUQUxaLzZSa1IvTTYvYzVzQ3BMY0VLbkVBRFY4V3NXcERNLzJINm1tVzlBPSIsImFtciI6WyJwd2QiLCJtZmEiXSwiYXBwX2Rpc3BsYXluYW1lIjoib25lZHJpdmUtY2YtaW5kZXgiLCJhcHBpZCI6IjI0ODkxODEwLWY4MTgtNGVkNS1hNzY3LTEzOGYzZDRlYmQyYyIsImFwcGlkYWNyIjoiMSIsImlkdHlwIjoidXNlciIsImlwYWRkciI6IjIwLjQwLjIwOS4yNDMiLCJuYW1lIjoiSW5kZXgiLCJvaWQiOiI4Zjk4NzZkMC0yMTQ0LTRiZTUtYWM0Zi1iNWNkMTYxNWY5MGUiLCJwbGF0ZiI6IjMiLCJwdWlkIjoiMTAwMzIwMDQ2MUVBOUNGOSIsInJoIjoiMS5BV0VCUFNZcExzdS1oRXU2c1AzX1lNZHVQUU1BQUFBQUFBQUF3QUFBQUFBQUFBQmhBVUZoQVEuIiwic2NwIjoiRmlsZXMuUmVhZC5BbGwgVXNlci5SZWFkIFVzZXIuUmVhZC5BbGwgVXNlci5SZWFkQmFzaWMuQWxsIFVzZXIuUmVhZFdyaXRlIFVzZXIuUmVhZFdyaXRlLkFsbCBwcm9maWxlIG9wZW5pZCBlbWFpbCIsInNpZCI6IjAwMmYyZTM5LTFhMjUtYTE1ZC05NmExLTJlZjI0OGRlMDk5OSIsInNpZ25pbl9zdGF0ZSI6WyJrbXNpIl0sInN1YiI6InhkeExKbXFIU0lwUVlFcXdTN0ZsRXY2MHBadnpDNmRwMi1pUEhZQjdhNUEiLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiTkEiLCJ0aWQiOiIyZTI5MjYzZC1iZWNiLTRiODQtYmFiMC1mZGZmNjBjNzZlM2QiLCJ1bmlxdWVfbmFtZSI6ImluZGV4QGJhYmhlb20ub25taWNyb3NvZnQuY29tIiwidXBuIjoiaW5kZXhAYmFiaGVvbS5vbm1pY3Jvc29mdC5jb20iLCJ1dGkiOiJlZ2llcGhyNEVFaUpkYi1sUnpVU0FBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX2Z0ZCI6InEyQ20yai1hS0pvOC1PeUFzZWFBQXVBdHpQOUMxRHRwWGJhaDk1LVh4ZWMiLCJ4bXNfaWRyZWwiOiIxIDIiLCJ4bXNfc3QiOnsic3ViIjoiRDdwSGRqWE1sRkdGQzU4NmV1TDZHNGJXbVpobUZaYzdkNl9yMDBYVEZyNCJ9LCJ4bXNfdGNkdCI6MTcyOTEwMDEwMn0.SmYOlCN...",
+  
+  refreshToken: '1.AWEBPSYpLsu-hEu6sP3_YMduPRAYiSQY-NVOp2cTjz1OvSxhAUFhAQ.AgABAwEAAABVrSpeuWamRam2jAF1XRQEAwDs_wUA9P8m-NlwmklgIgH31VvQLvmEq1cZi_iyimX0zh42OEZ6GW7yR69dp80JRY6-mUFluqDnzOnNIMsxtdlldt9--fKjNie2SjW8jgcd1IUpdW87cfK9AWwSeMEyGaDCk8gf_WHZjWsaE5Apebb59bC1vjPMUtrs8rwB9eFKKmbFuSUPmDUMhT7aZPb5pFCsD0xXI3FPZocWfhf7Q09iT_2IBX7iIRTyzwEMRcyOf22ZRzWEOOMPZZQ1zHnGy0CB9otlFkKLjYKghp4WqGjyPdZVx_lcER87R8NLD2YlHORrInqaBHgTkJQTvNU71yEsoFaIooPgoTRYkvnAFaUaZgN...',
+
+  // Cache-Control header settings
   cacheControlHeader: 'max-age=0, s-maxage=60, stale-while-revalidate',
-}
+};
